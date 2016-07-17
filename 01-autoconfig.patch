@@ -1,0 +1,28 @@
+From 01fa5ded44a5b6393948285b75896541faf6ba6f Mon Sep 17 00:00:00 2001
+From: Sean Peterson <sean.peterson@gmail.com>
+Date: Sat, 16 Jul 2016 18:49:11 -0500
+Subject: [PATCH] configure.ac: Patch for EL6
+
+Thanks to akbar.ahmed and pull request #252 in Netflix/dynomite!
+---
+ configure.ac |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 640fef3..26a2a99 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1,6 +1,10 @@
+ #                                               -*- Autoconf -*-
+ # Process this file with autoconf to produce a configure script.
+ 
++# Add support for m4_esyscmd_s to autoconf-2.63 (used in RHEL/CentOS 6.7)
++m4_ifndef([m4_esyscmd_s], [m4_define([m4_chomp_all], [m4_format([[%.*s]], m4_bregexp(m4_translit([[$1]], [/], [/ ]), [/*$]), [$1])])])
++m4_ifndef([m4_esyscmd_s], [m4_define([m4_esyscmd_s], [m4_chomp_all(m4_esyscmd([$1]))])])
++
+ AC_PREREQ([2.61])
+ 
+ AC_INIT([libsass], m4_esyscmd_s([./version.sh]), [support@moovweb.com])
+-- 
+1.7.1
+

@@ -15,6 +15,9 @@ BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  libtool
 
+%if 0%{?rhel} < 7
+Patch0:         01-autoconfig.patch
+%endif
 
 %description
 LibSass is a C/C++ port of the Sass engine. The point is to be simple, fast, and easy to integrate.
