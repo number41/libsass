@@ -1,13 +1,3 @@
-From 01fa5ded44a5b6393948285b75896541faf6ba6f Mon Sep 17 00:00:00 2001
-From: Sean Peterson <sean.peterson@gmail.com>
-Date: Sat, 16 Jul 2016 18:49:11 -0500
-Subject: [PATCH] configure.ac: Patch for EL6
-
-Thanks to akbar.ahmed and pull request #252 in Netflix/dynomite!
----
- configure.ac |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
-
 diff --git a/configure.ac b/configure.ac
 index 640fef3..26a2a99 100644
 --- a/configure.ac

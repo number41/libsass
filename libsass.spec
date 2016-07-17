@@ -33,25 +33,32 @@ developing applications that use %{name}.
 
 
 %prep
-%{?scl:scl enable %{scl} "}
-%setup -q
+%setup -q -n %{pkg_name}-%{version}
+
+%if 0%{?rhel} < 7
+%patch0 -p1
+%endif
+
+%{?scl:scl enable %{scl} - << \EOF}
+set -e
 autoreconf --force --install
-%{?scl:"}
+%{?scl:EOF}
 
 %build
-%{?scl:scl enable %{scl} "}
+%{?scl:scl enable %{scl} - << \EOF}
+set -e
 %configure --disable-static \
            --disable-tests \
            --enable-shared
 
 make %{?_smp_mflags}
-%{scl:"}
+%{?scl:EOF}
 
 %install
-%{?scl:scl enable %{scl} "}
+%{?scl:scl enable %{scl} - << \EOF}
 %make_install
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
-%{?scl:"}
+%{?scl:EOF}
 
 %post -p /sbin/ldconfig
 
