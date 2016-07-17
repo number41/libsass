@@ -1,11 +1,11 @@
 Name:           libsass
-Version:        %{version}
+Version:        3.3.6
 Release:        1%{?dist}
 Summary:        A C/C++ implementation of a Sass compiler
 
 License:        MIT
 URL:            http://libsass.org
-Source0:        %{name}-%{version}.tar.gz
+Source0:        https://github.com/sass/%{name}/archive/%{version}.tar.gz
 
 BuildRequires:  gcc-c++ >= 4.7
 BuildRequires:  autoconf
