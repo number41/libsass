@@ -1,4 +1,7 @@
-Name:           libsass
+%{?scl:%scl_package libsass}
+%{!?scl:%global pkg_name %{name}}
+
+Name:           %{?scl_prefix}libsass
 Version:        3.3.6
 Release:        1%{?dist}
 Summary:        A C/C++ implementation of a Sass compiler
@@ -7,7 +10,7 @@ License:        MIT
 URL:            http://libsass.org
 Source0:        https://github.com/sass/%{name}/archive/%{version}.tar.gz
 
-BuildRequires:  gcc-c++ >= 4.7
+BuildRequires:  %{?scl_prefix}gcc-c++
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  libtool
@@ -27,22 +30,25 @@ developing applications that use %{name}.
 
 
 %prep
+%{?scl:scl enable %{scl} "}
 %setup -q
 autoreconf --force --install
-
+%{?scl:"}
 
 %build
+%{?scl:scl enable %{scl} "}
 %configure --disable-static \
            --disable-tests \
            --enable-shared
 
 make %{?_smp_mflags}
-
+%{scl:"}
 
 %install
+%{?scl:scl enable %{scl} "}
 %make_install
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
-
+%{?scl:"}
 
 %post -p /sbin/ldconfig
 
