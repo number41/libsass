@@ -47,7 +47,7 @@ autoreconf --force --install
 %build
 %{?scl:scl enable %{scl} - << \EOF}
 set -e
-%configure --disable-static \
+%configure --enable-static \
            --disable-tests \
            --enable-shared
 
@@ -68,6 +68,7 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %files
 %doc Readme.md LICENSE
 %{_libdir}/*.so.*
+%{_libdir}/*.a
 
 %files devel
 %doc
