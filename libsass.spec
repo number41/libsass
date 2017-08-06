@@ -2,7 +2,7 @@
 %{!?scl:%global pkg_name %{name}}
 
 Name:           %{?scl_prefix}libsass
-Version:        3.3.6
+Version:        3.4.5
 Release:        1%{?dist}
 Summary:        A C/C++ implementation of a Sass compiler
 
